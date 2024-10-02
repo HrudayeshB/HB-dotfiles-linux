@@ -1,0 +1,12 @@
+[Unit]
+Description=Set brightness on startup
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/set-brightness.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
+
