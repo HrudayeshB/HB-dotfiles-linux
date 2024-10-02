@@ -34,6 +34,7 @@ alias l='ls -CF'
 alias gs='git status'
 alias gl1='git log --oneline'
 alias gl='git log'
+alias ga='git add -A'
 
 # opacity of terminal
 alias opc='~/.myscripts/sh_opacity.sh'

@@ -163,25 +163,30 @@ whatsapp() {
 # ---------------------------------
 # Function to list all commands
 # ---------------------------------
+
 listmy() {
-echo "Available Commands/Aliases:"
-echo "-------------------------------------------------------------------"
-echo "Command             Description"
-echo "-------------------------------------------------------------------"
-echo "e-setup             Launches Quartus and opens specified websites"
-echo "s <query>           Searches Google with the provided query"
-echo "y <query>           Searches YouTube with the provided query"
-echo "quartus1            Launches the Quartus software"
-echo "mygithub            Opens GitHub profile in the default browser"
-echo "chatgpt             Opens ChatGPT in the default browser"
-echo "listmy              Lists all available commands with descriptions"
-echo "whatsapp            Opens WhatsApp Web in the default browser"
-echo "quartus <project>   Opens specified Quartus project (.qpf)"
-echo "sb <%>              Set screen brightness to a percentage"
-echo "opc <%>             Set terminal opacity to a percentage"
-echo "c                   Clears the terminal"
-echo "qpd                 Opens the Quartus Projects directory"
-echo "-------------------------------------------------------------------"
+
+echo "   Available Commands/Aliases:"
+echo "-------------------------------------------------------------------------"
+printf "   %-20s - %s\n" "e-setup" "Launches Quartus and opens specified websites"
+printf "   %-20s - %s\n" "s <query>" "Searches Google with the provided query"
+printf "   %-20s - %s\n" "y <query>" "Searches YouTube with the provided query"
+printf "   %-20s - %s\n" "quartus1" "Launches the Quartus software"
+printf "   %-20s - %s\n" "mygithub" "Opens GitHub profile in the default browser"
+printf "   %-20s - %s\n" "chatgpt" "Opens ChatGPT in the default browser"
+printf "   %-20s - %s\n" "listmy" "Lists all available commands with descriptions"
+printf "   %-20s - %s\n" "whatsapp" "Opens WhatsApp Web in default browser"
+printf "   %-20s - %s\n" "quartus <project>" "Opens Quartus project"
+printf "   %-20s - %s\n" "sb <%>" "Set Brightness to some percentage"
+printf "   %-20s - %s\n" "opc <%>" "Set Opacity of the terminal to some percentage"
+printf "   %-20s - %s\n" "c" "clear"
+printf "   %-20s - %s\n" "qpd" "Quartus Projects Directory"
+printf "   %-20s - %s\n" "gs" "git status"
+printf "   %-20s - %s\n" "gl1" "git log --oneline"
+printf "   %-20s - %s\n" "gl" "git log"
+printf "   %-20s - %s\n" "ga" "git add -A"
+echo "-------------------------------------------------------------------------"
+
 }
 
 # ---------------------------------
