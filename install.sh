@@ -92,11 +92,18 @@ if ask_install "Do you want to install Zsh and configure Powerlevel10k?"; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.powerlevel10k
     echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
-    # Apply your custom Zsh config if available in your repo
-    stow zsh
+    # Apply your custom Zsh config and aliases
+    echo "Stowing Zsh and aliases configurations..."
+    stow zsh aliases
 fi
 
-# 8. Install your GNOME Terminal profile
+# 8. Stow additional configurations (Neofetch, etc.)
+if ask_install "Do you want to stow additional configurations (e.g., Neofetch, etc.)?"; then
+    echo "Stowing Neofetch and other configurations..."
+    stow neofetch
+fi
+
+# 9. Install your GNOME Terminal profile
 if ask_install "Do you want to add your custom GNOME Terminal profile with personal settings?"; then
     echo "Applying GNOME Terminal customizations..."
 
@@ -107,20 +114,20 @@ if ask_install "Do you want to add your custom GNOME Terminal profile with perso
     dconf write /org/gnome/terminal/legacy/profiles:/:$PROFILE_NAME/use-system-font "false"
 fi
 
-# 9. Install Nerd Fonts
+# 10. Install Nerd Fonts
 if ask_install "Do you want to install Nerd Fonts?"; then
     echo "Installing Nerd Fonts..."
     cp -r $HOME/HB-dotfiles-linux/fonts/* ~/.local/share/fonts/
     fc-cache -fv  # Rebuild font cache
 fi
 
-# 10. Change system font size
+# 11. Change system font size
 if ask_install "Do you want to change system font size to 12?"; then
     echo "Changing system font size..."
     gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
 fi
 
-# 11. Install additional software
+# 12. Install additional software
 if ask_install "Do you want to install vim, nano, neofetch, vlc, htop, tree, gcc, and Python3?"; then
     echo "Installing additional software..."
     sudo apt install -y vim nano neofetch vlc htop tree gcc python3 python3-pip
