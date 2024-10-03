@@ -179,8 +179,9 @@ printf "   %-20s - %s\n" "whatsapp" "Opens WhatsApp Web in default browser"
 printf "   %-20s - %s\n" "quartus <project>" "Opens Quartus project"
 printf "   %-20s - %s\n" "sb <%>" "Set Brightness to some percentage"
 printf "   %-20s - %s\n" "opc <%>" "Set Opacity of the terminal to some percentage"
-printf "   %-20s - %s\n" "c" "clear"
-printf "   %-20s - %s\n" "qpd" "Quartus Projects Directory"
+printf "   %-20s - %s\n" "nl <on/off>" "Turn Night Light (on) or (off)"
+printf "   %-20s - %s\n" "c" "clear the terminal"
+printf "   %-20s - %s\n" "qpd" "Go to Quartus Projects Directory"
 printf "   %-20s - %s\n" "gs" "git status"
 printf "   %-20s - %s\n" "gl1" "git log --oneline"
 printf "   %-20s - %s\n" "gl" "git log"
@@ -189,16 +190,6 @@ echo "-------------------------------------------------------------------------"
 
 }
 
-# ---------------------------------
-# Add Aliases
-# ---------------------------------
-alias e-setup='bash /home/hb1240/my_scripts.sh e-setup'
-alias s='bash /home/hb1240/my_scripts.sh s'
-alias y='bash /home/hb1240/my_scripts.sh y'
-alias quartus1='bash /home/hb1240/my_scripts.sh quartus'
-alias mygithub='bash /home/hb1240/my_scripts.sh mygithub'
-alias chatgpt='bash /home/hb1240/my_scripts.sh chatgpt'
-alias whatsapp='bash /home/hb1240/my_scripts.sh whatsapp'
 
 # ---------------------------------
 # Script Execution: Handle commands

@@ -36,5 +36,8 @@ alias gl1='git log --oneline'
 alias gl='git log'
 alias ga='git add -A'
 
-# opacity of terminal
+# Opacity of terminal
 alias opc='~/.myscripts/sh_opacity.sh'
+
+# Night light
+alias nl='~/.myscripts/night_light.sh'
