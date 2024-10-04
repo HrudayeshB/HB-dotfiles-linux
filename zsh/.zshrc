@@ -121,9 +121,10 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
-source ~/.aliases.sh
-
 # Start Neofetch on startup
 neofetch
+
+# Source aliases
+source ~/.aliases.sh
 
 # eval "$(starship init zsh)"
