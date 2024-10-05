@@ -20,6 +20,8 @@ alias ttd='~/.myscripts/channels.sh ttd'
 alias abn='~/.myscripts/channels.sh abn'
 alias ntv='~/.myscripts/channels.sh ntv'
 
+alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
+
 # qpd - quartus projects directory
 alias qpd='cd /home/hb1240/Quartus/Projects/'
 alias quartus='~/.myscripts/open_quartus.sh'

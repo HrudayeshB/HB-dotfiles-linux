@@ -1,8 +1,17 @@
-# Lines configured by zsh-newuser-install
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/hb1240/.zshrc'
+ZSH="/home/hb1240/.oh-my-zsh"
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+#Theme
+ZSH_THEME=""
+
+#Plugins
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting history)
+source $ZSH/oh-my-zsh.sh
+
+# Start Neofetch on startup
+neofetch
+
+# Source aliases
+source ~/.aliases.sh
+
+#Star Ship
+eval "$(starship init zsh)"
