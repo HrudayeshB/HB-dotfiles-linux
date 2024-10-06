@@ -145,6 +145,10 @@ mygithub() {
   xdg-open "https://github.com/HrudayeshB" 2>/dev/null
 }
 
+eb-git() {
+ xdg-open "https://github.com/E-yantra-EcoMender-Bot-1298/E-yantra-EcoMender-Bot---1298" 2>/dev/null 
+}
+
 # ---------------------------------
 # Section: ChatGPT (chatgpt)
 # ---------------------------------
@@ -173,6 +177,7 @@ printf "   %-20s - %s\n" "s <query>" "Searches Google with the provided query"
 printf "   %-20s - %s\n" "y <query>" "Searches YouTube with the provided query"
 printf "   %-20s - %s\n" "quartus1" "Launches the Quartus software"
 printf "   %-20s - %s\n" "mygithub" "Opens GitHub profile in the default browser"
+printf "   %-20s - %s\n" "eb-git" "Opens GitHub Repo of our Eyantra team"
 printf "   %-20s - %s\n" "chatgpt" "Opens ChatGPT in the default browser"
 printf "   %-20s - %s\n" "listmy" "Lists all available commands with descriptions"
 printf "   %-20s - %s\n" "whatsapp" "Opens WhatsApp Web in default browser"
@@ -212,6 +217,9 @@ case "$1" in
   mygithub)
     mygithub
     ;;
+  eb-git)
+	eb-git
+	;;
   chatgpt)
     chatgpt
     ;;

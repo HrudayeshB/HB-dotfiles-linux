@@ -185,4 +185,4 @@ bar {
         status_command i3status
 }
 
-exec_always feh --bg-scale /home/hb1240/Pictures/wallpaper.jpg
+exec_always feh --bg-scale /home/hb1240/Pictures/Wallpapers/wallpaper.jpg
