@@ -8,8 +8,8 @@ This repo is maintained for a soul reason of storing my configs so that when I c
 ![image](screenshots/1.png)
 
 ## Terminal zsh, customized starship prompt with oh-my-zsh plugins.
-Starship: custom catpuccin pallete config
-plugins: syntax_highlighting, autosuggestion
+- Starship: custom catpuccin pallete config
+- plugins: syntax_highlighting, autosuggestion
 ![image](screenshots/2.png)
 
 ## Neovim customization using NVchad with Catpuccin color theme.
