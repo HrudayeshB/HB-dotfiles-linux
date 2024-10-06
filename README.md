@@ -7,7 +7,8 @@ This repo is maintained for a soul reason of storing my configs so that when I c
 - CUstomized Top bar with gnome extensions
 ![image](screenshots/1.png)
 
-## Terminal zsh, customized Catpuccin pallete starship prompt with oh-my-zsh plugins.
+## Terminal zsh, customized starship prompt with oh-my-zsh plugins.
+Starship: custom catpuccin pallete config
 plugins: syntax_highlighting, autosuggestion
 ![image](screenshots/2.png)
 
