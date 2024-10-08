@@ -87,6 +87,7 @@ fi
 unstow_package "aliases"
 unstow_package "scripts"
 unstow_package "as_admin"
+unstow_package "vim"
 
 # Uninstall applications
 uninstall_package_with_nala "zsh"

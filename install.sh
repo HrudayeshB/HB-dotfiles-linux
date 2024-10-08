@@ -166,7 +166,7 @@ if [[ -d "aliases" ]]; then
 fi
 
 if [[ -d "my_scripts" ]]; then
-    stow "myscripts"
+    stow "my_scripts"
 fi
 
 if [[ -d "as_admin" ]]; then
