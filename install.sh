@@ -1,137 +1,114 @@
 #!/bin/bash
 
-# Function to ask for yes/no input
-ask_install() {
-    read -p "$1 (y/n): " -n 1 -r
-    echo    # move to new line
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        return 0  # Return 0 for yes
-    else
-        return 1  # Return 1 for no
+# Function to install packages
+install_package_with_nala() {
+    read -p "Do you want to install $1? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        sudo nala install -y $1
     fi
 }
 
-# 1. Update system
-if ask_install "Do you want to update the system?"; then
-    echo "Updating system..."
-    sudo apt update && sudo apt upgrade -y
-fi
+install_package() {
+    read -p "Do you want to install $1? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        sudo apt install -y $1
+    fi
+}
 
-# 2. Install Nala (Apt alternative)
-if ask_install "Do you want to install Nala?"; then
-    echo "Installing Nala..."
-    sudo apt install -y nala
-fi
+# Function to backup existing config files
+backup_and_replace() {
+    local target="$1"
+    local source="$2"
 
-# 3. Install VSCode with themes and extensions
-if ask_install "Do you want to install VSCode with your themes and extensions?"; then
-    echo "Installing Visual Studio Code..."
-    sudo apt install -y software-properties-common apt-transport-https wget
-    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    sudo apt update
-    sudo apt install -y code
+    # Check if the target file exists
+    if [[ -e "$target" ]]; then
+        echo "Backing up existing file: $target"
+        mv "$target" "${target}.bak"  # Backup the existing file
+    fi
 
-    # Install your VSCode extensions (replace with your extensions)
-    echo "Installing VSCode extensions..."
-    code --install-extension ms-python.python
-    code --install-extension ms-vscode.cpptools
-    code --install-extension your-theme-extension  # Add your theme
-fi
+    # Create a symlink to the new config file
+    ln -sfn "$(pwd)/$source" "$target"  # Replace with a symlink
+}
 
-# 4. Install GNOME Tweaks
-if ask_install "Do you want to install GNOME Tweaks?"; then
-    echo "Installing GNOME Tweaks..."
-    sudo apt install -y gnome-tweaks
-fi
+# Function to install Oh My Zsh
+install_oh_my_zsh() {
+    read -p "Do you want to install Oh My Zsh? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+}
 
-# 5. Set GNOME keybindings
-if ask_install "Do you want to set custom GNOME keybindings?"; then
-    echo "Setting GNOME keybindings..."
+# Function to install Starship
+install_starship() {
+    read -p "Do you want to install Starship? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        curl -sS https://starship.rs/install.sh | sh
+    fi
+}
 
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom0 name "'File Manager'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom0 command "'nautilus'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom0 binding "'<Super>F'"
+# Function to install Zsh plugins
+install_zsh_plugins() {
+    read -p "Do you want to install Zsh autosuggestions plugin? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    fi
+    
+    read -p "Do you want to install Zsh syntax highlighting plugin? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    fi
+}
 
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom1 name "'Firefox'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom1 command "'firefox'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom1 binding "'<Super>B'"
+# Function to change the default shell to Zsh
+change_default_shell() {
+    read -p "Do you want to change your default shell to Zsh? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        chsh -s $(which zsh)
+    fi
+}
 
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom2 name "'Terminal'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom2 command "'gnome-terminal'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom2 binding "'<Super>Return'"
+# Install applications
+install_package "nala"
+install_package_with_nala "htop"
+install_package_with_nala "tree"
+install_package_with_nala "python3"
+install_package_with_nala "gcc"
+install_package_with_nala "neofetch"
+install_package_with_nala "stow"
+# Add more packages as needed
 
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom3 name "'Close Window'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom3 command "'wmctrl -c :ACTIVE:'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom3 binding "'<Super><Shift>Q'"
+# Backup and replace dotfiles
+backup_and_replace "$HOME/.bashrc" "bash/.bashrc"
+backup_and_replace "$HOME/.zshrc" "zsh/.zshrc"
+backup_and_replace "$HOME/.vimrc" "vim/.vimrc"
+backup_and_replace "$HOME/.config/nvim/init.vim" "nvim/init.vim"
 
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom4 name "'Maximize Window'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom4 command "'wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz'"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings/custom4 binding "'<Super><Shift>F'"
-fi
+# Install Oh My Zsh
+install_oh_my_zsh
 
-# 6. Install GNOME Extensions
-if ask_install "Do you want to install GNOME extensions (X11 gestures, rounded window corners, vitals, etc.)?"; then
-    echo "Installing GNOME extensions..."
-    sudo apt install -y gnome-shell-extensions
+# Install Starship
+install_starship
 
-    # Install specific extensions using the extension IDs
-    gnome-extensions install --force x11-gestures@joseexposito.github.io
-    gnome-extensions install --force rounded-window-corners@yilozt.github.io
-    gnome-extensions install --force vitals@corecoding.com
-    gnome-extensions install --force hidetopbar@mathieu.bidon.ca
-    gnome-extensions install --force blur-my-shell@aunetx
-    gnome-extensions install --force clipboard-history@tudmotu.com
-fi
+# Install Zsh plugins
+install_zsh_plugins
 
-# 7. Zsh and Powerlevel10k setup
-if ask_install "Do you want to install Zsh and configure Powerlevel10k?"; then
-    echo "Installing Zsh..."
-    sudo apt install -y zsh
-    echo "Installing Powerlevel10k..."
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.powerlevel10k
-    echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+# Change default shell to Zsh
+change_default_shell
 
-    # Apply your custom Zsh config and aliases
-    echo "Stowing Zsh and aliases configurations..."
-    stow zsh aliases
-fi
+# Configure .zshrc to use Starship and plugins
+echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
+echo 'plugins=(git zsh-autosuggestions zsh-syntax-highlighting)' >> "$HOME/.zshrc"
+echo 'source ~/.aliases.sh' >> "$HOME/.zshrc"
 
-# 8. Stow additional configurations (Neofetch, etc.)
-if ask_install "Do you want to stow additional configurations (e.g., Neofetch, etc.)?"; then
-    echo "Stowing Neofetch and other configurations..."
-    stow neofetch
-fi
+# Source the new .zshrc
+source "$HOME/.zshrc"
 
-# 9. Install your GNOME Terminal profile
-if ask_install "Do you want to add your custom GNOME Terminal profile with personal settings?"; then
-    echo "Applying GNOME Terminal customizations..."
+# Stow the rest of the dotfiles
+stow bash
+stow neofetch
+stow nvim
+stow aliases
+stow scripts
 
-    # Create a new profile and set font preferences
-    PROFILE_NAME="CustomProfile"
-    dconf write /org/gnome/terminal/legacy/profiles:/list "['$PROFILE_NAME']"
-    dconf write /org/gnome/terminal/legacy/profiles:/:$PROFILE_NAME/font "'Nerd Font Mono 15'"
-    dconf write /org/gnome/terminal/legacy/profiles:/:$PROFILE_NAME/use-system-font "false"
-fi
-
-# 10. Install Nerd Fonts
-if ask_install "Do you want to install Nerd Fonts?"; then
-    echo "Installing Nerd Fonts..."
-    cp -r $HOME/HB-dotfiles-linux/fonts/* ~/.local/share/fonts/
-    fc-cache -fv  # Rebuild font cache
-fi
-
-# 11. Change system font size
-if ask_install "Do you want to change system font size to 12?"; then
-    echo "Changing system font size..."
-    gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
-fi
-
-# 12. Install additional software
-if ask_install "Do you want to install vim, nano, neofetch, vlc, htop, tree, gcc, and Python3?"; then
-    echo "Installing additional software..."
-    sudo apt install -y vim nano neofetch vlc htop tree gcc python3 python3-pip
-fi
-
-echo "Setup complete!"
+echo "Setup complete! Please restart your terminal or log out and log back in to apply changes."
 
