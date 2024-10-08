@@ -144,6 +144,22 @@ for pkg in "${installed_packages[@]}"; do
     stow "$pkg"
 done
 
+# Stow Neofetch if installed
+if [[ " ${installed_packages[@]} " =~ " neofetch " ]]; then
+    read -p "Do you want to stow Neofetch? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        stow "neofetch"
+    fi
+fi
+
+# Stow Starship if installed
+if [[ " ${installed_packages[@]} " =~ " starship " ]]; then
+    read -p "Do you want to stow Starship? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        stow "starship"
+    fi
+fi
+
 # Stow the aliases and scripts folders
 if [[ -d "aliases" ]]; then
     stow "aliases"
