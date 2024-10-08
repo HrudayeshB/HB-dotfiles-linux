@@ -165,7 +165,7 @@ if [[ -d "aliases" ]]; then
     stow "aliases"
 fi
 
-if [[ -d "myscripts" ]]; then
+if [[ -d "my_scripts" ]]; then
     stow "myscripts"
 fi
 
