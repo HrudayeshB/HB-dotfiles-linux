@@ -12,7 +12,7 @@ install_package() {
 
 install_package "nala"
 
-install_package_with_() {
+install_package_with_nala() {
     read -p "Do you want to install $1? (y/n): " choice
     if [[ "$choice" == "y" ]]; then
         sudo nala install -y $1
@@ -143,6 +143,20 @@ echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
 for pkg in "${installed_packages[@]}"; do
     stow "$pkg"
 done
+
+# Stow the aliases and scripts folders
+if [[ -d "aliases" ]]; then
+    stow "aliases"
+fi
+
+if [[ -d "myscripts" ]]; then
+    stow "myscripts"
+fi
+
+if [[ -d "as_admin" ]]; then
+    stow "as_admin"
+fi
+
 
 # Change default shell to Zsh at the end
 change_default_shell

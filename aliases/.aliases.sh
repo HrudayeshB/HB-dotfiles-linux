@@ -6,15 +6,15 @@ sb() {
 }
 
 # My Aliases
-alias e-setup='bash /home/hb1240/.myscripts/my_scripts.sh e-setup'
-alias s='bash /home/hb1240/.myscripts/my_scripts.sh s'
-alias y='bash /home/hb1240/.myscripts/my_scripts.sh y'
-alias quartus1='bash /home/hb1240/.myscripts/my_scripts.sh quartus'
-alias mygithub='bash /home/hb1240/.myscripts/my_scripts.sh mygithub'
-alias eb-git='bash /home/hb1240/.myscripts/my_scripts.sh eb-git'
-alias chatgpt='bash /home/hb1240/.myscripts/my_scripts.sh chatgpt'
-alias whatsapp='bash /home/hb1240/.myscripts/my_scripts.sh whatsapp'
-alias listmy='bash /home/hb1240/.myscripts/my_scripts.sh listmy'
+alias e-setup='$HOME/.myscripts/my_scripts.sh e-setup'
+alias s='$HOME/.myscripts/my_scripts.sh s'
+alias y='$HOME/.myscripts/my_scripts.sh y'
+alias quartus1='$HOME.myscripts/my_scripts.sh quartus'
+alias mygithub='$HOME/.myscripts/my_scripts.sh mygithub'
+alias eb-git='$HOME/.myscripts/my_scripts.sh eb-git'
+alias chatgpt='$HOME/.myscripts/my_scripts.sh chatgpt'
+alias whatsapp='$HOME/.myscripts/my_scripts.sh whatsapp'
+alias listmy='$HOME/.myscripts/my_scripts.sh listmy'
 
 alias chans='~/.myscripts/channels.sh chans'
 alias ttd='~/.myscripts/channels.sh ttd'
@@ -24,7 +24,7 @@ alias ntv='~/.myscripts/channels.sh ntv'
 alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
 
 # qpd - quartus projects directory
-alias qpd='cd /home/hb1240/Quartus/Projects/'
+alias qpd='cd $HOME/Quartus/Projects/'
 alias quartus='~/.myscripts/open_quartus.sh'
 
 #alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
