@@ -5,17 +5,21 @@ install_package() {
     read -p "Do you want to install $1? (y/n): " choice
     if [[ "$choice" == "y" ]]; then
         sudo apt install -y $1
+        return 1  # Indicate that the package was installed
     fi
-}
-
-install_package_with_nala() {
-    read -p "Do you want to install $1? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        sudo nala install -y $1
-    fi
+    return 0  # Indicate that the package was not installed
 }
 
 install_package "nala"
+
+install_package_with_() {
+    read -p "Do you want to install $1? (y/n): " choice
+    if [[ "$choice" == "y" ]]; then
+        sudo nala install -y $1
+        return 1  # Indicate that the package was installed
+    fi
+    return 0  # Indicate that the package was not installed
+}
 
 # Function to backup existing config files
 backup_and_replace() {
@@ -38,7 +42,9 @@ install_oh_my_zsh() {
     if [[ "$choice" == "y" ]]; then
         # Prevent switching to Zsh mid-script
         RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        return 1  # Indicate that Oh My Zsh was installed
     fi
+    return 0  # Indicate that Oh My Zsh was not installed
 }
 
 # Function to install Starship
@@ -46,20 +52,28 @@ install_starship() {
     read -p "Do you want to install Starship? (y/n): " choice
     if [[ "$choice" == "y" ]]; then
         curl -sS https://starship.rs/install.sh | sh
+        return 1  # Indicate that Starship was installed
     fi
+    return 0  # Indicate that Starship was not installed
 }
 
 # Function to install Zsh plugins
 install_zsh_plugins() {
+    local installed=0
+
     read -p "Do you want to install Zsh autosuggestions plugin? (y/n): " choice
     if [[ "$choice" == "y" ]]; then
         git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        ((installed++))  # Increment the count of installed plugins
     fi
     
     read -p "Do you want to install Zsh syntax highlighting plugin? (y/n): " choice
     if [[ "$choice" == "y" ]]; then
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+        ((installed++))  # Increment the count of installed plugins
     fi
+
+    return $installed  # Return the count of installed plugins
 }
 
 # Function to change the default shell to Zsh after script finishes
@@ -71,16 +85,19 @@ change_default_shell() {
     fi
 }
 
+# Track installed programs for stowing later
+installed_packages=()
+
 # Install applications
-install_package_with_nala "zsh"
-install_package_with_nala "curl"
-install_package_with_nala "wget"
-install_package_with_nala "htop"
-install_package_with_nala "tree"
-install_package_with_nala "python3"
-install_package_with_nala "gcc"
-install_package_with_nala "neofetch"
-install_package_with_nala "stow"
+if install_package_with_nala "zsh"; then installed_packages+=("zsh"); fi
+if install_package_with_nala "curl"; then installed_packages+=("curl"); fi
+if install_package_with_nala "wget"; then installed_packages+=("wget"); fi
+if install_package_with_nala "htop"; then installed_packages+=("htop"); fi
+if install_package_with_nala "tree"; then installed_packages+=("tree"); fi
+if install_package_with_nala "python3"; then installed_packages+=("python3"); fi
+if install_package_with_nala "gcc"; then installed_packages+=("gcc"); fi
+if install_package_with_nala "neofetch"; then installed_packages+=("neofetch"); fi
+if install_package_with_nala "stow"; then installed_packages+=("stow"); fi
 # Add more packages as needed
 
 # Backup and replace dotfiles
@@ -89,24 +106,43 @@ backup_and_replace "$HOME/.zshrc" "zsh/.zshrc"
 backup_and_replace "$HOME/.vimrc" "vim/.vimrc"
 
 # Install Oh My Zsh without switching to Zsh immediately
-install_oh_my_zsh
+if install_oh_my_zsh; then installed_packages+=("oh-my-zsh"); fi
 
 # Install Starship
-install_starship
+if install_starship; then installed_packages+=("starship"); fi
 
-# Install Zsh plugins
-install_zsh_plugins
+# Install Zsh plugins and capture if any were installed
+plugins_installed=$(install_zsh_plugins)
 
-# Configure .zshrc to use Starship and plugins
-echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
-echo 'plugins=(git zsh-autosuggestions zsh-syntax-highlighting)' >> "$HOME/.zshrc"
+# Create .zshrc based on user selections
+cat <<EOL > "$HOME/.zshrc"
+ZSH="$HOME/.oh-my-zsh"
+
+# Theme
+ZSH_THEME=""
+
+# Plugins
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting history)
+source \$ZSH/oh-my-zsh.sh
+
+# Start Neofetch on startup
+EOL
+
+# Add Neofetch line if user chose to install it
+if [[ $plugins_installed -gt 0 ]]; then
+    echo "neofetch" >> "$HOME/.zshrc"
+fi
+
+# Source aliases
 echo 'source ~/.aliases.sh' >> "$HOME/.zshrc"
 
-# Stow the rest of the dotfiles
-stow bash
-stow neofetch
-stow aliases
-stow scripts
+# Starship initialization
+echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
+
+# Stow the installed packages
+for pkg in "${installed_packages[@]}"; do
+    stow "$pkg"
+done
 
 # Change default shell to Zsh at the end
 change_default_shell
