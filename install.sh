@@ -15,6 +15,8 @@ install_package() {
     fi
 }
 
+install_package "nala"
+
 # Function to backup existing config files
 backup_and_replace() {
     local target="$1"
@@ -68,7 +70,6 @@ change_default_shell() {
 }
 
 # Install applications
-install_package "nala"
 install_package_with_nala "htop"
 install_package_with_nala "tree"
 install_package_with_nala "python3"
