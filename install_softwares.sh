@@ -113,6 +113,8 @@ fi
 # Install packages
 install_package "nala"
 install_package_with_nala "zsh"
+install_package_with_nala "nano"
+install_package_with_nala "micro"
 install_package_with_nala "curl"
 install_package_with_nala "stow"
 install_package_with_nala "wget"
