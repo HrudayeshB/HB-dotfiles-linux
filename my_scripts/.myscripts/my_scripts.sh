@@ -66,7 +66,7 @@ e_setup() {
 # ---------------------------------
 # Section: search in Google (s)
 # ---------------------------------
-google_search() {
+brave_search() {
   # Function to check network connectivity
   check_network() {
     echo "Checking network connectivity..."
@@ -88,9 +88,9 @@ google_search() {
   # Check network connectivity
   check_network
 
-  # Format the input as a Google search query
+  # Format the input as a Brave search query
   query="$*"
-  search_url="https://www.google.com/search?q=$(echo $query | sed 's/ /+/g')"
+  search_url="https://search.brave.com/search?q=$(echo $query | sed 's/ /+/g')"
 
   # Open search in browser
   timeout 5s xdg-open "$search_url" 2>/dev/null
@@ -173,7 +173,7 @@ listmy() {
 echo "   Available Commands/Aliases:"
 echo "-------------------------------------------------------------------------"
 printf "   %-20s - %s\n" "e-setup" "Launches Quartus and opens specified websites"
-printf "   %-20s - %s\n" "s <query>" "Searches Google with the provided query"
+printf "   %-20s - %s\n" "s <query>" "Searches Brave with the provided query"
 printf "   %-20s - %s\n" "y <query>" "Searches YouTube with the provided query"
 printf "   %-20s - %s\n" "quartus1" "Launches the Quartus software"
 printf "   %-20s - %s\n" "mygithub" "Opens GitHub profile in the default browser"
@@ -205,7 +205,7 @@ case "$1" in
     ;;
   s)
     shift
-    google_search "$@"
+    brave_search "$@"
     ;;
   y)
     shift

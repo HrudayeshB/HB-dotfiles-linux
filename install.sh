@@ -8,6 +8,9 @@ CYAN="\e[36m"
 BOLD="\e[1m"
 RESET="\e[0m"
 
+# Flag to track if we are installing all packages without confirmation
+INSTALL_ALL_PACKAGES=false
+
 # Print a colorful message
 print_message() {
     echo -e "${CYAN}$1${RESET}"
@@ -16,7 +19,14 @@ print_message() {
 # Function to ask for confirmation (Yes/No) with default Yes
 confirm_install() {
     local package_name="$1"
-    read -p "Do you want to install ${BOLD}${package_name}${RESET}? [Y/n]: " choice
+    
+    # If installing all packages, skip the confirmation
+    if [[ "$INSTALL_ALL_PACKAGES" == true ]]; then
+        return 0  # Yes (install by default)
+    fi
+
+    echo -e "Do you want to install ${BOLD}${package_name}${RESET}? [Y/n]: "
+    read -r choice
     if [[ -z "$choice" || "$choice" =~ ^[Yy]$ ]]; then
         return 0  # Yes (default)
     else
@@ -36,10 +46,11 @@ install_package() {
     fi
 }
 
+# Function to install a package with Nala
 install_package_with_nala() {
     local package_name="$1"
     if confirm_install "$package_name"; then
-        print_message "Installing ${BOLD}${package_name}${RESET}..."
+        print_message "Installing ${BOLD}${package_name}${RESET} with Nala..."
         sudo nala install -y "$package_name"
         echo -e "${GREEN}Installed ${package_name} successfully!${RESET}\n"
     else
@@ -89,87 +100,50 @@ install_oh_my_zsh() {
 
 # Prompt if user wants to install all packages
 echo -e "${BOLD}Welcome to the Software Install Script!${RESET}"
-read -p "Do you want to install all packages? [y/n]: " install_all
+read -p "Do you want to install all packages? [y/N]: " install_all
 
-# If "yes", proceed with installing all
+# If "yes", proceed with installing all without asking
 if [[ "$install_all" =~ ^[Yy]$ ]]; then
-    print_message "Proceeding with installation of all packages...\n"
-
-    # Install packages
-    install_package "nala (mandatory for further installs)"
-    install_package_with_nala "zsh"
-    install_package_with_nala "curl"
-    install_package_with_nala "stow"
-    install_package_with_nala "wget"
-    install_package_with_nala "tree"
-    install_package_with_nala "python3"
-    install_package_with_nala "gcc"
-    install_package_with_nala "neofetch"
-    
-    # Install Starship
-    if confirm_install "Starship"; then
-        print_message "Installing ${BOLD}Starship${RESET}..."
-        curl -sS https://starship.rs/install.sh | sh
-        echo -e "${GREEN}Installed Starship successfully!${RESET}\n"
-    else
-        echo -e "${YELLOW}Skipping Starship.${RESET}\n"
-    fi
-
-    # Install VSCode
-    if confirm_install "VSCode"; then
-        print_message "Installing ${BOLD}VSCode${RESET}..."
-        sudo apt install -y software-properties-common apt-transport-https wget
-        wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-        sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-        sudo apt update
-        sudo apt install -y code
-        echo -e "${GREEN}Installed VSCode successfully!${RESET}\n"
-    else
-        echo -e "${YELLOW}Skipping VSCode.${RESET}\n"
-    fi
-
-    # Install Neovim from GitHub
-    install_neovim
-
-    # Install Oh My Zsh and plugins
-    install_oh_my_zsh
-
+    INSTALL_ALL_PACKAGES=true
+    print_message "Proceeding with installation of all packages without confirmation...\n"
 else
     print_message "Proceeding with individual selections...\n"
-
-    # Install packages selectively
-    install_package "nala"
-    install_package "zsh"
-    install_package "curl"
-    install_package "stow"
-    install_package "wget"
-    install_package "tree"
-    install_package "python3"
-    install_package "gcc"
-    install_package "neofetch"
-    
-    # Install Starship
-    if confirm_install "Starship"; then
-        curl -sS https://starship.rs/install.sh | sh
-        echo -e "${GREEN}Installed Starship successfully!${RESET}\n"
-    fi
-
-    # Install VSCode
-    if confirm_install "VSCode"; then
-        sudo apt install -y software-properties-common apt-transport-https wget
-        wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-        sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-        sudo apt update
-        sudo apt install -y code
-        echo -e "${GREEN}Installed VSCode successfully!${RESET}\n"
-    fi
-
-    # Install Neovim from GitHub
-    install_neovim
-
-    # Install Oh My Zsh and plugins
-    install_oh_my_zsh
 fi
+
+# Install packages
+install_package "nala"
+install_package_with_nala "zsh"
+install_package_with_nala "curl"
+install_package_with_nala "stow"
+install_package_with_nala "wget"
+install_package_with_nala "tree"
+install_package_with_nala "python3"
+install_package_with_nala "gcc"
+install_package_with_nala "neofetch"
+
+# Install Starship
+if confirm_install "Starship"; then
+    print_message "Installing ${BOLD}Starship${RESET}..."
+    curl -sS https://starship.rs/install.sh | sh
+    echo -e "${GREEN}Installed Starship successfully!${RESET}\n"
+fi
+
+# Install VSCode
+if confirm_install "VSCode"; then
+    print_message "Installing ${BOLD}VSCode${RESET}..."
+    sudo apt install -y software-properties-common apt-transport-https wget
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    sudo apt update
+    sudo apt install -y code
+    echo -e "${GREEN}Installed VSCode successfully!${RESET}\n"
+fi
+
+# Install Neovim from GitHub
+install_neovim
+
+# Install Oh My Zsh and plugins
+install_oh_my_zsh
 
 # Final message
 echo -e "${BOLD}${GREEN}All installations are complete!${RESET}"
