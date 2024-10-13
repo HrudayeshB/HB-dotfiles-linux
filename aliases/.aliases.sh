@@ -6,16 +6,18 @@ sb() {
 }
 
 # My Aliases
+
+alias listmy="~/.myscripts/commands_list.sh"
+
 alias mc='micro'
-alias e-setup='$HOME/.myscripts/my_scripts.sh e-setup'
-alias s='$HOME/.myscripts/my_scripts.sh s'
-alias y='$HOME/.myscripts/my_scripts.sh y'
-alias quartus1='$HOME.myscripts/my_scripts.sh quartus'
-alias mygithub='$HOME/.myscripts/my_scripts.sh mygithub'
-alias eb-git='$HOME/.myscripts/my_scripts.sh eb-git'
-alias chatgpt='$HOME/.myscripts/my_scripts.sh chatgpt'
-alias whatsapp='$HOME/.myscripts/my_scripts.sh whatsapp'
-alias listmy='$HOME/.myscripts/my_scripts.sh listmy'
+alias e-setup='~/.myscripts/my_scripts.sh e-setup'
+alias s='~/.myscripts/my_scripts.sh s'
+alias y='~/.myscripts/my_scripts.sh y'
+alias quartus1='~/.myscripts/my_scripts.sh quartus'
+alias mygithub='~/.myscripts/my_scripts.sh mygithub'
+alias eb-git='~/.myscripts/my_scripts.sh eb-git'
+alias chatgpt='~/.myscripts/my_scripts.sh chatgpt'
+alias whatsapp='~/.myscripts/my_scripts.sh whatsapp'
 
 alias chans='~/.myscripts/channels.sh chans'
 alias ttd='~/.myscripts/channels.sh ttd'
@@ -25,7 +27,7 @@ alias ntv='~/.myscripts/channels.sh ntv'
 alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
 
 # qpd - quartus projects directory
-alias qpd='cd $HOME/Quartus/Projects/'
+alias qpd='cd ~/Quartus/Projects/'
 alias quartus='~/.myscripts/open_quartus.sh'
 
 #alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
@@ -49,3 +51,5 @@ alias nl='~/.myscripts/night_light.sh'
 # AI
 alias ai='python3 ~/.local/bin/sgpt'
 alias jarvis='ollama run jarvis'
+alias ollama='~/.myscripts/ollama_run.sh'
+alias docker_serv='~/.myscripts/docker_service.sh'

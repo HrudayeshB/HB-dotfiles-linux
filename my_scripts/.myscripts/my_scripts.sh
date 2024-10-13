@@ -165,38 +165,6 @@ whatsapp() {
 
 
 # ---------------------------------
-# Function to list all commands
-# ---------------------------------
-
-listmy() {
-
-echo "   Available Commands/Aliases:"
-echo "-------------------------------------------------------------------------"
-printf "   %-20s - %s\n" "e-setup" "Launches Quartus and opens specified websites"
-printf "   %-20s - %s\n" "s <query>" "Searches Brave with the provided query"
-printf "   %-20s - %s\n" "y <query>" "Searches YouTube with the provided query"
-printf "   %-20s - %s\n" "quartus1" "Launches the Quartus software"
-printf "   %-20s - %s\n" "mygithub" "Opens GitHub profile in the default browser"
-printf "   %-20s - %s\n" "eb-git" "Opens GitHub Repo of our Eyantra team"
-printf "   %-20s - %s\n" "chatgpt" "Opens ChatGPT in the default browser"
-printf "   %-20s - %s\n" "listmy" "Lists all available commands with descriptions"
-printf "   %-20s - %s\n" "whatsapp" "Opens WhatsApp Web in default browser"
-printf "   %-20s - %s\n" "quartus <project>" "Opens Quartus project"
-printf "   %-20s - %s\n" "sb <%>" "Set Brightness to some percentage"
-printf "   %-20s - %s\n" "opc <%>" "Set Opacity of the terminal to some percentage"
-printf "   %-20s - %s\n" "nl <on/off>" "Turn Night Light (on) or (off)"
-printf "   %-20s - %s\n" "c" "clear the terminal"
-printf "   %-20s - %s\n" "qpd" "Go to Quartus Projects Directory"
-printf "   %-20s - %s\n" "gs" "git status"
-printf "   %-20s - %s\n" "gl1" "git log --oneline"
-printf "   %-20s - %s\n" "gl" "git log"
-printf "   %-20s - %s\n" "ga" "git add -A"
-echo "-------------------------------------------------------------------------"
-
-}
-
-
-# ---------------------------------
 # Script Execution: Handle commands
 # ---------------------------------
 case "$1" in
@@ -226,8 +194,4 @@ case "$1" in
   whatsapp)
     whatsapp
     ;;
-  listmy)
-    listmy
-    ;;
 esac
-
