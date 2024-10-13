@@ -51,5 +51,5 @@ alias nl='~/.myscripts/night_light.sh'
 # AI
 alias ai='python3 ~/.local/bin/sgpt'
 alias jarvis='ollama run jarvis'
-alias ollama='~/.myscripts/ollama_run.sh'
+alias olama_serv='~/.myscripts/ollama_run.sh'
 alias docker_serv='~/.myscripts/docker_service.sh'
