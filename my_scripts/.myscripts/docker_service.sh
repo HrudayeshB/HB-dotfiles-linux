@@ -2,7 +2,7 @@
 
 if [ "$1" == "on" ]; then
     systemctl start docker
-    echo "Docker service stopped"
+    echo "Docker service started"
 elif [ "$1" == "off" ]; then
     systemctl stop docker
     echo "Docker service stopped"
