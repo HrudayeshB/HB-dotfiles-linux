@@ -6,6 +6,7 @@ sb() {
 }
 
 # My Aliases
+alias mc='micro'
 alias e-setup='$HOME/.myscripts/my_scripts.sh e-setup'
 alias s='$HOME/.myscripts/my_scripts.sh s'
 alias y='$HOME/.myscripts/my_scripts.sh y'
@@ -44,3 +45,7 @@ alias opc='~/.myscripts/sh_opacity.sh'
 
 # Night light
 alias nl='~/.myscripts/night_light.sh'
+
+# AI
+alias ai='python3 ~/.local/bin/sgpt'
+alias jarvis='ollama run jarvis'
