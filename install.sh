@@ -1,181 +1,176 @@
 #!/bin/bash
 
-# Function to install packages
-install_package() {
-    read -p "Do you want to install $1? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        sudo apt install -y $1
-        return 1  # Indicate that the package was installed
-    fi
-    return 0  # Indicate that the package was not installed
+# Define colors for better aesthetics
+GREEN="\e[32m"
+RED="\e[31m"
+YELLOW="\e[33m"
+CYAN="\e[36m"
+BOLD="\e[1m"
+RESET="\e[0m"
+
+# Print a colorful message
+print_message() {
+    echo -e "${CYAN}$1${RESET}"
 }
 
-install_package "nala"
+# Function to ask for confirmation (Yes/No) with default Yes
+confirm_install() {
+    local package_name="$1"
+    read -p "Do you want to install ${BOLD}${package_name}${RESET}? [Y/n]: " choice
+    if [[ -z "$choice" || "$choice" =~ ^[Yy]$ ]]; then
+        return 0  # Yes (default)
+    else
+        return 1  # No
+    fi
+}
+
+# Function to install a package
+install_package() {
+    local package_name="$1"
+    if confirm_install "$package_name"; then
+        print_message "Installing ${BOLD}${package_name}${RESET}..."
+        sudo apt install -y "$package_name"
+        echo -e "${GREEN}Installed ${package_name} successfully!${RESET}\n"
+    else
+        echo -e "${YELLOW}Skipping ${package_name}.${RESET}\n"
+    fi
+}
 
 install_package_with_nala() {
-    read -p "Do you want to install $1? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        sudo nala install -y $1
-        return 1  # Indicate that the package was installed
+    local package_name="$1"
+    if confirm_install "$package_name"; then
+        print_message "Installing ${BOLD}${package_name}${RESET}..."
+        sudo nala install -y "$package_name"
+        echo -e "${GREEN}Installed ${package_name} successfully!${RESET}\n"
+    else
+        echo -e "${YELLOW}Skipping ${package_name}.${RESET}\n"
     fi
-    return 0  # Indicate that the package was not installed
 }
 
-# Function to backup existing config files
-backup_and_replace() {
-    local target="$1"
-    local source="$2"
-
-    # Check if the target file exists
-    if [[ -e "$target" ]]; then
-        echo "Backing up existing file: $target"
-        mv "$target" "${target}.bak"  # Backup the existing file
+# Function to clone and install Neovim from GitHub
+install_neovim() {
+    if confirm_install "Neovim from GitHub"; then
+        print_message "Installing ${BOLD}Neovim${RESET} from GitHub..."
+        git clone https://github.com/neovim/neovim.git
+        cd neovim && make CMAKE_BUILD_TYPE=Release
+        sudo make install
+        cd ..
+        echo -e "${GREEN}Installed Neovim successfully!${RESET}\n"
+    else
+        echo -e "${YELLOW}Skipping Neovim.${RESET}\n"
     fi
-
-    # Create a symlink to the new config file
-    ln -sfn "$(pwd)/$source" "$target"  # Replace with a symlink
 }
 
-# Function to install Oh My Zsh without switching the shell mid-script
+# Function to install Oh My Zsh and plugins
 install_oh_my_zsh() {
-    read -p "Do you want to install Oh My Zsh? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        # Prevent switching to Zsh mid-script
+    if confirm_install "Oh My Zsh"; then
+        print_message "Installing ${BOLD}Oh My Zsh${RESET}..."
         RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-        return 1  # Indicate that Oh My Zsh was installed
+        echo -e "${GREEN}Installed Oh My Zsh successfully!${RESET}\n"
+        
+        # Install Zsh plugins
+        if confirm_install "Zsh Autosuggestions plugin"; then
+            git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+            echo -e "${GREEN}Installed Zsh Autosuggestions plugin!${RESET}\n"
+        else
+            echo -e "${YELLOW}Skipping Zsh Autosuggestions.${RESET}\n"
+        fi
+        
+        if confirm_install "Zsh Syntax Highlighting plugin"; then
+            git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+            echo -e "${GREEN}Installed Zsh Syntax Highlighting plugin!${RESET}\n"
+        else
+            echo -e "${YELLOW}Skipping Zsh Syntax Highlighting.${RESET}\n"
+        fi
+    else
+        echo -e "${YELLOW}Skipping Oh My Zsh.${RESET}\n"
     fi
-    return 0  # Indicate that Oh My Zsh was not installed
 }
 
-# Function to install Starship
-install_starship() {
-    read -p "Do you want to install Starship? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        curl -sS https://starship.rs/install.sh | sh
-        return 1  # Indicate that Starship was installed
-    fi
-    return 0  # Indicate that Starship was not installed
-}
+# Prompt if user wants to install all packages
+echo -e "${BOLD}Welcome to the Software Install Script!${RESET}"
+read -p "Do you want to install all packages? [y/n]: " install_all
 
-# Function to install Zsh plugins
-install_zsh_plugins() {
-    local installed=0
+# If "yes", proceed with installing all
+if [[ "$install_all" =~ ^[Yy]$ ]]; then
+    print_message "Proceeding with installation of all packages...\n"
 
-    read -p "Do you want to install Zsh autosuggestions plugin? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-        ((installed++))  # Increment the count of installed plugins
-    fi
+    # Install packages
+    install_package "nala (mandatory for further installs)"
+    install_package_with_nala "zsh"
+    install_package_with_nala "curl"
+    install_package_with_nala "stow"
+    install_package_with_nala "wget"
+    install_package_with_nala "tree"
+    install_package_with_nala "python3"
+    install_package_with_nala "gcc"
+    install_package_with_nala "neofetch"
     
-    read -p "Do you want to install Zsh syntax highlighting plugin? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-        ((installed++))  # Increment the count of installed plugins
+    # Install Starship
+    if confirm_install "Starship"; then
+        print_message "Installing ${BOLD}Starship${RESET}..."
+        curl -sS https://starship.rs/install.sh | sh
+        echo -e "${GREEN}Installed Starship successfully!${RESET}\n"
+    else
+        echo -e "${YELLOW}Skipping Starship.${RESET}\n"
     fi
 
-    return $installed  # Return the count of installed plugins
-}
-
-# Function to change the default shell to Zsh after script finishes
-change_default_shell() {
-    read -p "Do you want to change your default shell to Zsh? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        chsh -s $(which zsh)
-        echo "Your default shell has been changed to Zsh. Please restart your terminal."
+    # Install VSCode
+    if confirm_install "VSCode"; then
+        print_message "Installing ${BOLD}VSCode${RESET}..."
+        sudo apt install -y software-properties-common apt-transport-https wget
+        wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+        sudo apt update
+        sudo apt install -y code
+        echo -e "${GREEN}Installed VSCode successfully!${RESET}\n"
+    else
+        echo -e "${YELLOW}Skipping VSCode.${RESET}\n"
     fi
-}
 
-# Track installed programs for stowing later
-installed_packages=()
+    # Install Neovim from GitHub
+    install_neovim
 
-# Install applications
-if install_package_with_nala "zsh"; then installed_packages+=("zsh"); fi
-if install_package_with_nala "curl"; then installed_packages+=("curl"); fi
-if install_package_with_nala "wget"; then installed_packages+=("wget"); fi
-if install_package_with_nala "htop"; then installed_packages+=("htop"); fi
-if install_package_with_nala "tree"; then installed_packages+=("tree"); fi
-if install_package_with_nala "python3"; then installed_packages+=("python3"); fi
-if install_package_with_nala "gcc"; then installed_packages+=("gcc"); fi
-if install_package_with_nala "neofetch"; then installed_packages+=("neofetch"); fi
-if install_package_with_nala "stow"; then installed_packages+=("stow"); fi
-# Add more packages as needed
+    # Install Oh My Zsh and plugins
+    install_oh_my_zsh
 
-# Backup and replace dotfiles
-backup_and_replace "$HOME/.bashrc" "bash/.bashrc"
-backup_and_replace "$HOME/.zshrc" "zsh/.zshrc"
-backup_and_replace "$HOME/.vimrc" "vim/.vimrc"
+else
+    print_message "Proceeding with individual selections...\n"
 
-# Install Oh My Zsh without switching to Zsh immediately
-if install_oh_my_zsh; then installed_packages+=("oh-my-zsh"); fi
-
-# Install Starship
-if install_starship; then installed_packages+=("starship"); fi
-
-# Install Zsh plugins and capture if any were installed
-plugins_installed=$(install_zsh_plugins)
-
-# Create .zshrc based on user selections
-cat <<EOL > "$HOME/.zshrc"
-ZSH="$HOME/.oh-my-zsh"
-
-# Theme
-ZSH_THEME=""
-
-# Plugins
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting history)
-source \$ZSH/oh-my-zsh.sh
-
-# Start Neofetch on startup
-EOL
-
-# Add Neofetch line if user chose to install it
-if [[ $plugins_installed -gt 0 ]]; then
-    echo "neofetch" >> "$HOME/.zshrc"
-fi
-
-# Source aliases
-echo 'source ~/.aliases.sh' >> "$HOME/.zshrc"
-
-# Starship initialization
-echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
-
-# Stow the installed packages
-for pkg in "${installed_packages[@]}"; do
-    stow "$pkg"
-done
-
-# Stow Neofetch if installed
-if [[ " ${installed_packages[@]} " =~ " neofetch " ]]; then
-    read -p "Do you want to stow Neofetch? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        stow "neofetch"
+    # Install packages selectively
+    install_package "nala"
+    install_package "zsh"
+    install_package "curl"
+    install_package "stow"
+    install_package "wget"
+    install_package "tree"
+    install_package "python3"
+    install_package "gcc"
+    install_package "neofetch"
+    
+    # Install Starship
+    if confirm_install "Starship"; then
+        curl -sS https://starship.rs/install.sh | sh
+        echo -e "${GREEN}Installed Starship successfully!${RESET}\n"
     fi
-fi
 
-# Stow Starship if installed
-if [[ " ${installed_packages[@]} " =~ " starship " ]]; then
-    read -p "Do you want to stow Starship? (y/n): " choice
-    if [[ "$choice" == "y" ]]; then
-        stow "starship"
+    # Install VSCode
+    if confirm_install "VSCode"; then
+        sudo apt install -y software-properties-common apt-transport-https wget
+        wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+        sudo apt update
+        sudo apt install -y code
+        echo -e "${GREEN}Installed VSCode successfully!${RESET}\n"
     fi
+
+    # Install Neovim from GitHub
+    install_neovim
+
+    # Install Oh My Zsh and plugins
+    install_oh_my_zsh
 fi
 
-# Stow the aliases and scripts folders
-if [[ -d "aliases" ]]; then
-    stow "aliases"
-fi
-
-if [[ -d "my_scripts" ]]; then
-    stow "my_scripts"
-fi
-
-if [[ -d "as_admin" ]]; then
-    stow "as_admin"
-fi
-
-
-# Change default shell to Zsh at the end
-change_default_shell
-
-echo "Setup complete! Please restart your terminal or log out and log back in to apply changes."
+# Final message
+echo -e "${BOLD}${GREEN}All installations are complete!${RESET}"
 
