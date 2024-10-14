@@ -30,23 +30,26 @@
 # echo "-------------------------------------------------------------------------"
 # 
 
+
 #!/bin/bash
 
-# Define color variables for styling
-GREEN="\e[32m"
-YELLOW="\e[33m"
-CYAN="\e[36m"
+# Define Dracula theme color variables
+LAVENDER="\e[38;5;141m"
+PINK="\e[38;5;213m"
+LIGHT_BLUE="\e[38;5;117m"
+LIGHT_GREEN="\e[38;5;84m"
+LIGHT_RED="\e[38;5;203m"
 BOLD="\e[1m"
 RESET="\e[0m"
 
 # Function to print each command with description
 print_command() {
-    printf "   ${CYAN}${BOLD}%-20s${RESET} - ${YELLOW}%s${RESET}\n" "$1" "$2"
+    printf "       ${LIGHT_BLUE}${BOLD}%-20s${RESET} - ${PINK}%s${RESET}\n" "$1" "$2"
 }
 
 # Print the title with styling
-echo "${BOLD}${GREEN}   Available Commands/Aliases:${RESET}"
-echo "${BOLD}${CYAN}-------------------------------------------------------------------------${RESET}"
+echo "${BOLD}${LAVENDER}                          Available Commands/Aliases:${RESET}"
+echo "${BOLD}${LIGHT_GREEN}    ---------------------------------------------------------------------------${RESET}"
 
 # List of commands and their descriptions
 print_command "e-setup" "Launches Quartus and opens specified websites"
@@ -64,14 +67,16 @@ print_command "opc <%>" "Set Opacity of the terminal to some percentage"
 print_command "nl <on/off>" "Turn Night Light (on) or (off)"
 print_command "c" "Clear the terminal"
 print_command "qpd" "Go to Quartus Projects Directory"
-print_command "gs" "git status"
-print_command "gl1" "git log --oneline"
-print_command "gl" "git log"
-print_command "ga" "git add -A"
+print_command "gs" "alias for 'git status'"
+print_command "gl1" "alias for 'git log --oneline'"
+print_command "gl" "alias for 'git log'"
+print_command "ga" "alias for 'git add -A'"
+print_command "gcm" "alias for 'git commit -m'"
+print_command "mc" "alias for 'micro' text editor"
 print_command "ollama <on/off>" "Start or stop Ollama service"
 print_command "docker_serv <on/off>" "Start or stop Docker service"
 print_command "ai" "Activates Shell-GPT running llama3.2:1b"
-print_command "ga" "Activates Jarvis llama3.2:1b custom AI model"
+print_command "jarvis" "Activates Jarvis llama3.2:1b custom AI model"
 
 # End line with styling
-echo "${BOLD}${CYAN}-------------------------------------------------------------------------${RESET}"
+echo "${BOLD}${LIGHT_GREEN}    ---------------------------------------------------------------------------${RESET}"
