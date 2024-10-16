@@ -3,3 +3,6 @@ fontname_waves = Monospace 11
 
 [signal]
 fontname_signals = Monospace 11
+
+[banner]
+splash_disable 1

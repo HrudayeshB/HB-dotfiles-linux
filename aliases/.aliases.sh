@@ -36,6 +36,9 @@ alias c='clear'
 alias ll='ls -alFh'
 alias l='ls -CF'
 
+# icarus verilog make
+alias icv='make -f ~/adld/Makefiles/makefile_icarus/Makefile'
+
 # git
 alias gs='git status'
 alias gl1='git log --oneline'
