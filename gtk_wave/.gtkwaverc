@@ -6,3 +6,6 @@ fontname_signals = Monospace 11
 
 [banner]
 splash_disable 1
+
+do_initial_zoom_fit 1
+
