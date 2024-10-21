@@ -58,6 +58,19 @@ install_package_with_nala() {
     fi
 }
 
+# Function to install Obsidian
+install_obsidian() {
+    if confirm_install "Obsidian"; then
+        print_message "Installing ${BOLD}Obsidian${RESET}..."
+        wget https://github.com/obsidianmd/obsidian-releases/releases/download/v1.7.4/obsidian_1.7.4_amd64.deb
+        sudo dpkg -i obsidian_1.7.4_amd64.deb
+        sudo apt install -f
+        echo -e "${GREEN}Installed Obsidian successfully!${RESET}\n"
+    else
+        echo -e "${YELLOW}Skipping Obsidian.${RESET}\n"
+    fi
+}
+
 # Function to clone and install Neovim from GitHub
 install_neovim() {
     if confirm_install "Neovim from GitHub"; then
@@ -147,6 +160,8 @@ install_neovim
 # Install Oh My Zsh and plugins
 install_oh_my_zsh
 
+# Install Obsidian
+install_obsidian
+
 # Final message
 echo -e "${BOLD}${GREEN}All installations are complete!${RESET}"
-
