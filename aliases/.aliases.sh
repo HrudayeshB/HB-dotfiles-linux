@@ -30,6 +30,10 @@ alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove
 alias qpd='cd ~/Quartus/Projects/'
 alias quartus='~/.myscripts/open_quartus.sh'
 
+# Obsidian
+alias obsidian='~/.myscripts/obsidian-launcher.sh'
+alias firefox='~/.myscripts/firefox-launcher.sh'
+
 #alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
 
 alias c='clear'
