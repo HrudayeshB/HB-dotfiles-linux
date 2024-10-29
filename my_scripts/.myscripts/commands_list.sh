@@ -77,6 +77,9 @@ print_command "ollama <on/off>" "Start or stop Ollama service"
 print_command "docker_serv <on/off>" "Start or stop Docker service"
 print_command "ai" "Activates Shell-GPT running llama3.2:1b"
 print_command "jarvis" "Activates Jarvis llama3.2:1b custom AI model"
+print_command "icv <run/wave>" "icarus verilog compilation and gtkwave"
+print_command "icv-setup" "setups folders for icarus simulation"
+print_command "forge <on/off>" "Enables or disables Tiling extension"
 
 # End line with styling
 echo "${BOLD}${LIGHT_GREEN}    ---------------------------------------------------------------------------${RESET}"
