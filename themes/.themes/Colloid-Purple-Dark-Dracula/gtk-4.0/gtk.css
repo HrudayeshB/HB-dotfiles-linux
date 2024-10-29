@@ -7541,3 +7541,18 @@ window#desktopwindow.background {
 @define-color theme_unfocused_selected_fg_color @accent_fg_color;
 @define-color unfocused_insensitive_color @insensitive_bg_color;
 @define-color unfocused_borders alpha(currentColor,0.12);
+
+
+/* delete header terminal */
+terminal-window headerbar *,
+terminal-window .titlebar
+{
+  background-image:none;
+  background-color:transparent;
+  margin-top:-100px;
+}
+
+/* remove rounded corners */
+terminal-window decoration {
+    border-radius: 0px 0px 0px 0px
+}

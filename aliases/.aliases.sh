@@ -42,6 +42,7 @@ alias l='ls -CF'
 
 # icarus verilog make
 alias icv='make -f ~/adld/Makefiles/makefile_icarus/Makefile'
+alias icv-setup='~/.myscripts/icv_setup.sh'
 
 # git
 alias gs='git status'
@@ -52,6 +53,9 @@ alias gcm='git commit -m'
 
 # Opacity of terminal
 alias opc='~/.myscripts/sh_opacity.sh'
+
+# Gnome-Extensions
+alias forge='~/.myscripts/forge_toggle.sh'
 
 # Night light
 alias nl='~/.myscripts/night_light.sh'
