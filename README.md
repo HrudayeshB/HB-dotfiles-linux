@@ -24,3 +24,12 @@ This repo is maintained for a soul reason of storing my configs so that when I c
 
 ## VS Code Custom theme (OM Theme (no italic)).
 ![image](screenshots/7.png)
+
+## Purple-Land (My Custom Hyperland in GNOME)
+![image](screenshots/8.png)
+![image](screenshots/9.png)
+![image](screenshots/10.png)
+![image](screenshots/11.png)
+![image](screenshots/12.png)
+![image](screenshots/13.png)
+

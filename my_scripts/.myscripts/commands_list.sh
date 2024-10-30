@@ -44,12 +44,12 @@ RESET="\e[0m"
 
 # Function to print each command with description
 print_command() {
-    printf "       ${LIGHT_BLUE}${BOLD}%-20s${RESET} - ${PINK}%s${RESET}\n" "$1" "$2"
+    printf "      ${LIGHT_BLUE}${BOLD}%-20s${RESET} - ${PINK}%s${RESET}\n" "$1" "$2"
 }
 
 # Print the title with styling
 echo "${BOLD}${LAVENDER}                          Available Commands/Aliases:${RESET}"
-echo "${BOLD}${LIGHT_GREEN}    ---------------------------------------------------------------------------${RESET}"
+echo "${BOLD}${LIGHT_GREEN}   ---------------------------------------------------------------------------${RESET}"
 
 # List of commands and their descriptions
 print_command "e-setup" "Launches Quartus and opens specified websites"
@@ -80,6 +80,8 @@ print_command "jarvis" "Activates Jarvis llama3.2:1b custom AI model"
 print_command "icv <run/wave>" "icarus verilog compilation and gtkwave"
 print_command "icv-setup" "setups folders for icarus simulation"
 print_command "forge <on/off>" "Enables or disables Tiling extension"
+print_command "showoff" "Opens cava, pipes, cmatrix, neofetch, mpv"
+print_command "stopit" "Stops music and closes all terminals of showoff"
 
 # End line with styling
-echo "${BOLD}${LIGHT_GREEN}    ---------------------------------------------------------------------------${RESET}"
+echo "${BOLD}${LIGHT_GREEN}   ---------------------------------------------------------------------------${RESET}"

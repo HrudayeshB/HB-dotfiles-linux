@@ -8501,16 +8501,19 @@ FIXME this is really an API */
 @define-color BLACK_700 #33302F;
 @define-color BLACK_900 #2B2928;
 
+
+/* MY EDITS */
 /* delete header terminal */
 terminal-window headerbar *,
 terminal-window .titlebar
 {
   background-image:none;
   background-color:transparent;
-  margin-top:-100px;
+  margin-top:-150px;
 }
 
 /* remove rounded corners */
 terminal-window decoration {
     border-radius: 0px 0px 0px 0px
 }
+/* ABOVE IS FROM A GITHUB REPO */

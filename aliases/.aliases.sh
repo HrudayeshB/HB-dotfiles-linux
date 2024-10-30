@@ -56,6 +56,11 @@ alias opc='~/.myscripts/sh_opacity.sh'
 
 # Gnome-Extensions
 alias forge='~/.myscripts/forge_toggle.sh'
+alias topbar='~/.myscripts/topbar.sh'
+
+# Show off
+alias showoff='~/.myscripts/showoff.sh'
+alias stopit='~/.myscripts/close.sh'
 
 # Night light
 alias nl='~/.myscripts/night_light.sh'

@@ -14,4 +14,13 @@ M.base46 = {
 	-- },
 }
 
+M.ui = {
+    theme = "catppuccin", -- Your chosen theme
+    nvdash = {
+        load_on_startup = true, -- Enable the dashboard on startup
+    },
+    transparency = true, -- Set transparency to true to enable it
+}
+
+
 return M
