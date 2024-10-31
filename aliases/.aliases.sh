@@ -1,6 +1,6 @@
-#!/bin/zsh
 
 # Set Brightness Function
+#!/bin/zsh
 sb() {
     sudo brightnessctl set "$1%" > /dev/null 2>&1
 }
@@ -39,6 +39,7 @@ alias firefox='~/.myscripts/firefox-launcher.sh'
 alias c='clear'
 alias ll='ls -alFh'
 alias l='ls -CF'
+alias lla='eza -al --icons'
 
 # icarus verilog make
 alias icv='make -f ~/adld/Makefiles/makefile_icarus/Makefile'
@@ -61,6 +62,7 @@ alias topbar='~/.myscripts/topbar.sh'
 # Show off
 alias showoff='~/.myscripts/showoff.sh'
 alias stopit='~/.myscripts/close.sh'
+alias purple-land='~/.myscripts/purple_land.sh'
 
 # Night light
 alias nl='~/.myscripts/night_light.sh'

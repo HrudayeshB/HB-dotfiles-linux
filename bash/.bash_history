@@ -1,7 +1,3 @@
-git push
-ls
-cd SGPA_Calculator/
-cd gpa_calculator/
 cd SGPA_Calculator/
 ls
 git add page1.html
@@ -1997,4 +1993,8 @@ l
 ll
 sudo nala install zsh
 chsh -s $(which zsh)
+clear
+cmatrix
+cmatrix -C blue
+cmatrix
 clear
