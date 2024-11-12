@@ -72,3 +72,6 @@ alias ai='python3 ~/.local/bin/sgpt'
 alias jarvis='ollama run jarvis'
 alias olama_serv='~/.myscripts/ollama_run.sh'
 alias docker_serv='~/.myscripts/docker_service.sh'
+
+# Docker
+alias ub22='.myscripts/docker_ubuntu22.sh'
