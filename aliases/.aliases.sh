@@ -34,12 +34,15 @@ alias quartus='~/.myscripts/open_quartus.sh'
 alias obsidian='~/.myscripts/obsidian-launcher.sh'
 alias firefox='~/.myscripts/firefox-launcher.sh'
 
-#alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
-
+# Terminal
+alias sysboost='sudo nala update && sudo nala upgrade -y'
 alias c='clear'
 alias ll='ls -alFh'
 alias l='ls -CF'
 alias lla='eza -al --icons'
+
+# HB-PassMan
+alias hbpass='~/.myscripts/passman.sh'
 
 # icarus verilog make
 alias icv='make -f ~/adld/Makefiles/makefile_icarus/Makefile'
@@ -74,4 +77,4 @@ alias olama_serv='~/.myscripts/ollama_run.sh'
 alias docker_serv='~/.myscripts/docker_service.sh'
 
 # Docker
-alias ub22='.myscripts/docker_ubuntu22.sh'
+alias ub22='~/.myscripts/docker_ubuntu22.sh'
