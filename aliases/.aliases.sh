@@ -24,6 +24,9 @@ alias ttd='~/.myscripts/channels.sh ttd'
 alias abn='~/.myscripts/channels.sh abn'
 alias ntv='~/.myscripts/channels.sh ntv'
 
+alias rename_screenshots='~/.myscripts/rename_screenshots.sh'
+alias downloads_arrange='~/.myscripts/organize_downloads.sh'
+
 alias sysboost='sudo nala update && sudo nala upgrade -y && sudo nala autoremove'
 
 # qpd - quartus projects directory

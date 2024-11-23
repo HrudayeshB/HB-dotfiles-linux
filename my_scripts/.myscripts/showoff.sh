@@ -11,7 +11,7 @@ gnome-terminal -- zsh -c "cava; exec bash" &
 sleep 1  # Allow Forge to snap
 
 # Terminal 2: Top-right corner - running pipes.sh
-gnome-terminal -- zsh -c "pipes.sh; exec bash" &
+gnome-terminal -- zsh -c "pipes.sh -p 3; exec bash" &
 sleep 1  # Allow Forge to snap
 
 # Simulate Alt + Left Arrow to switch focus back to the first terminal

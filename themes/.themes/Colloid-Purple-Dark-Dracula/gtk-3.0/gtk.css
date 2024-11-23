@@ -8501,7 +8501,7 @@ FIXME this is really an API */
 @define-color BLACK_700 #33302F;
 @define-color BLACK_900 #2B2928;
 
-/* REMOVES TITLE BAR OF GNOME TERMINAL
+/* REMOVES TITLE BAR OF GNOME TERMINAL */
 /* delete header terminal */
 terminal-window headerbar *,
 terminal-window .titlebar

@@ -83,6 +83,8 @@ print_command "forge <on/off>" "Enables or disables Tiling extension"
 print_command "showoff" "Opens cava, pipes, cmatrix, neofetch, mpv"
 print_command "stopit" "Stops music and closes all terminals of showoff"
 print_command "ub22 <start|exec|stop>" "eyrc Docker image - ubuntu 22.04"
+print_command "rename_screenshots" "Renames all screenshots in the folder"
+print_command "downloads_arrange" "Arranges files in Downloads folder"
 
 # End line with styling
 echo "${BOLD}${LIGHT_GREEN}   ---------------------------------------------------------------------------${RESET}"
