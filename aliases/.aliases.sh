@@ -81,3 +81,9 @@ alias docker_serv='~/.myscripts/docker_service.sh'
 
 # Docker
 alias ub22='~/.myscripts/docker_ubuntu22.sh'
+
+# ros
+alias ubros2='~/.myscripts/ros_launch.sh'
+
+# "Digital" Software
+alias digital='java -jar ~/VLSI/Digital/Digital.jar'

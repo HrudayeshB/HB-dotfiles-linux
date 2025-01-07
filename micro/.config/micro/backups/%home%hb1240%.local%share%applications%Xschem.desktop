@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Xschem
+Comment=Circuit Simulator
+Exec=xschem /home/
+Type=Application
+Terminal=false
+Icon=application-x-java-archive
+Categories=Education;Development;
