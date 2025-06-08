@@ -33,3 +33,10 @@ This repo is maintained for a soul reason of storing my configs so that when I c
 ![image](screenshots/12.png)
 ![image](screenshots/13.png)
 
+## Hyprland on Ubuntu (Official)
+![image](screenshots/14.png)
+![image](screenshots/15.png)
+![image](screenshots/16.png)
+![image](screenshots/17.png)
+![image](screenshots/18.png)
+![image](screenshots/19.png)
