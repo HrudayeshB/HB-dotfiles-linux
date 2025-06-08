@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CHOSEN=$(printf " Lock\n⏾ Suspend\n Reboot\n Shutdown\n Log Out" | rofi -dmenu -i -p "Power Menu")
+CHOSEN=$(printf " Lock\n⏾ Suspend\n Reboot\n Shutdown\n Log Out" | rofi -dmenu -i -p "Power Menu" -theme powermenu.rasi)
 
 case "$CHOSEN" in
   *Lock*) hyprlock ;;  # or gtklock, etc.

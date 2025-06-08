@@ -1,0 +1,7 @@
+// import the base theme file to keep all colors and styles
+@theme "~/.config/rofi/mocha.rasi"
+
+window {
+    width: 300;  // smaller width for power menu
+    height: 340; // smaller height for power menu
+}
