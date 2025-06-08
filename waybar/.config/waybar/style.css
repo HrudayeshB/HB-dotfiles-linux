@@ -1,0 +1,144 @@
+* {
+  border: none;
+  /* border-radius: 0; */
+  min-height: 0;
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 15px;
+}
+
+window#waybar {
+  /* height: 30px; Change this to your desired height */
+  background-color: rgba(11, 10, 32, 0.74);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.5;
+}
+
+#workspaces {
+  background-color: transparent;
+}
+
+#workspaces button {
+  all: initial;
+  /* Remove GTK theme values (waybar #1351) */
+  min-width: 0;
+  /* Fix weird spacing in materia (waybar #450) */
+  box-shadow: inset 0 -3px transparent;
+  /* Use box-shadow instead of border so the text isn't offset */
+  padding: 1px 10px;
+  margin: 7px 5px;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #cdd6f4;
+}
+
+#workspaces button.active {
+  color: #1e1e2e;
+  background-color: #D9B8FD;
+  padding-left: 8px;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+  color: #1e1e2e;
+  background-color: #D9B8FD;
+  transition: 0.2s ease;
+}
+
+#workspaces button.urgent {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+  padding-left: 8px;
+}
+
+#memory,
+#custom-power,
+#battery,
+#backlight,
+#wireplumber,
+#network,
+#clock,
+#tray {
+  border-radius: 4px;
+  margin: 7px 5px;
+  padding: 1px 12px;
+  background-color: #1e1e2e;
+  color: #181825;
+  padding-right: 16px
+}
+
+#custom-power {
+  margin-right: 6px;
+}
+
+#custom-logo {
+  padding-right: 7px;
+  padding-left: 7px;
+  margin-left: 5px;
+  font-size: 14px;
+  border-radius: 8px 0px 0px 8px;
+  color: #1793d1;
+}
+
+#memory {
+  background-color: #fab387;
+}
+
+#battery {
+  background-color: #f38ba8;
+  padding-right: 17px;
+}
+
+#battery.warning,
+#battery.critical,
+#battery.urgent {
+  background-color: #ff0000;
+  color: #FFFF00;
+}
+
+#battery.charging {
+  background-color: #a6e3a1;
+  color: #181825;
+}
+
+#backlight {
+  background-color: #fab387;
+}
+
+#wireplumber {
+  background-color: #FDE6A0;
+  padding-right: 21px;
+}
+
+#network {
+  background-color: #94e2d5;
+  padding-right: 18px;
+}
+
+#clock {
+  font-family: JetBrainsMono Nerd Font;
+  background-color: #cba6f7;
+}
+
+#custom-power {
+  background-color: #cba6f7;
+  padding-left: 14px;
+  margin-right: 10px;
+}
+
+
+tooltip {
+  border-radius: 4px;
+  padding: 15px;
+  background-color: #12112a;
+}
+
+tooltip label {
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #12112a;
+}

@@ -7549,6 +7549,7 @@ terminal-window .titlebar
   background-image:none;
   background-color:transparent;
   margin-top:-100px;
+  border: none;
 }
 
 /* remove rounded corners */

@@ -1,21 +1,3 @@
-cd SGPA_Calculator/
-ls
-git add page1.html
-git status
-ls
-git status
-git add logo.png
-git status
-code index.html 
-git status
-git add .
-git commit -m "Logo added , fixed gui bugs"
-git push
-git congfig --list
-git config --list
-code index.html 
-code page1.html 
-git add .
 git commit -m "Logo added, removed borders, menu button fixed"
 git push
 clear
@@ -1998,3 +1980,26 @@ cmatrix
 cmatrix -C blue
 cmatrix
 clear
+ls
+clear
+c
+la
+cd clear
+ls
+cd Programming/
+ls
+cd c_language/
+ls
+micro Makefile 
+clear
+c
+exit
+cd Programming/c_language/
+ls
+scp Makefile hbarch@192.168.29.248:/home/hbarch/Programming
+exit
+cd Programming/c_language/
+ls
+cat Makefile
+exi
+exit

@@ -87,3 +87,7 @@ alias ubros2='~/.myscripts/ros_launch.sh'
 
 # "Digital" Software
 alias digital='java -jar ~/VLSI/Digital/Digital.jar'
+
+# Hyprland
+alias waybar='~/.myscripts/waybar_toggle.sh'
+alias rofi-wifi='~/Ubuntu-Hyprland-24.04/rofi-wifi-menu/rofi-wifi-menu.sh'

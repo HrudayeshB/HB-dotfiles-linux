@@ -146,3 +146,7 @@ alias ntv='~/channels.sh ntv'
 
 alias cpud='eog /home/hb1240/Pictures/Screenshots/"Screenshot from 2024-09-29 09-56-27.png" '
 alias quartus='~/open_quartus.sh'
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/hb1240/.lmstudio/bin"
+. "$HOME/.cargo/env"
