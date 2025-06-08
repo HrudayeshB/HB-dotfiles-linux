@@ -9,9 +9,4 @@ configuration {
     display-filebrowser: "󰉋 filebrowser:";
 }
 
-* {
-  font: "Hack Nerd Font 12";
-}
-
-
 @theme "~/.config/rofi/mocha.rasi"

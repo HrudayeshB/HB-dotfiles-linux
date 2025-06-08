@@ -81,7 +81,8 @@ window#waybar.hidden {
   margin-left: 5px;
   font-size: 14px;
   border-radius: 8px 0px 0px 8px;
-  color: #1793d1;
+  /* color: #1793d1; */
+  color: #F7845B;
 }
 
 #memory {
